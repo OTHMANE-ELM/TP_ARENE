@@ -30,6 +30,25 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in); //System.in = clavier
+
+        System.out.println("=== Joueur 1 ===");
+        Personnage p1 = creerPersonnage(sc);
+        System.out.println("=== Joueur 2 ===");
+        Personnage p2 = creerPersonnage(sc);
+
+        // Annonce du combat en MAJUSCULES
+        System.out.println(">>> " + p1.nom.toUpperCase() + " VS " + p2.nom.toUpperCase()
+                + " : QUE LE MEILLEUR GAGNE ! <<<");
+
+        sc.close();
+
+
+
+
+
+
+
 
 
 
