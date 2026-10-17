@@ -2,6 +2,33 @@
 import java.util.Scanner;
 
 public class Main {
+    public static Personnage creerPersonnage(Scanner sc) {
+        System.out.print("Nom : ");
+        String nom = sc.nextLine().trim();
+        // Tant que le nom est vide ou trop court, on redemande
+        while (nom.length() < 2) {
+            System.out.println("Erreur : le nom doit contenir au moins 2 caractères.");
+            System.out.print("Nom : ");
+            nom = sc.nextLine().trim();
+        }
+        System.out.print("Univers : ");
+        String univers = sc.nextLine().trim();
+
+        System.out.print("Attaque spéciale : ");
+        String attaque = sc.nextLine().trim();
+
+        System.out.print("Points de vie (1 à 500) : ");
+        int pv = sc.nextInt();
+        while (pv <= 0 || pv > 500) {
+            System.out.println("Erreur : les points de vie doivent être entre 1 et 500.");
+            System.out.print("Points de vie (1 à 500) : ");
+            pv = sc.nextInt();
+        }
+        sc.nextLine(); // vide le retour à la ligne laissé par nextInt()
+      return new Personnage(nom, univers, attaque, pv);
+    }
+
+
     public static void main(String[] args) {
 
 
