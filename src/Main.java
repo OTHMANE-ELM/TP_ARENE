@@ -1,6 +1,4 @@
-
 import java.util.Scanner;
-
 public class Main {
     public static Personnage creerPersonnage(Scanner sc) {
         System.out.print("Nom : ");
@@ -52,7 +50,24 @@ public class Main {
 
 
 
-        // Création de deux objets (instances) de la classe Personnage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /*       // Création de deux objets (instances) de la classe Personnage
         Personnage goku = new Personnage("GOKU", "Dragon Ball", "Kamehameha", 100);
         Personnage naruto = new Personnage("NARUTO", "Naruto", "Rasengan", 90);
         Personnage lufy = new Personnage("LUFY", "ONE PEICE", "GOMO GOMO NO", 80);
@@ -91,7 +106,10 @@ public class Main {
         goku.monterDeNiveau(); // niveau 3
         goku.attaquer(lufy); // Naruto est KO, on attaque donc Vegeta
         lufy.afficherEtat();
+        */
     }
+
+
 }
 
 
