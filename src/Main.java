@@ -26,6 +26,10 @@ public class Main {
       return new Personnage(nom, univers, attaque, pv);
     }
 
+    int tour = 0; // compteur de tours joués
+    boolean niveauUtilise1 = false; // joueur 1 : niveau déjà monté ? boolean niveauUtilise2 = false; // joueur 2 : idem
+    Personnage abandonneur = null; // null tant que personne n'abandonne
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in); //System.in = clavier
@@ -39,7 +43,110 @@ public class Main {
         System.out.println(">>> " + p1.nom.toUpperCase() + " VS " + p2.nom.toUpperCase()
                 + " : QUE LE MEILLEUR GAGNE ! <<<");
 
+        // Variables du combat
+        int tour = 0;                      // compteur de tours joués
+        boolean niveauUtilise1 = false;    // joueur 1 : niveau déjà monté ?
+        boolean niveauUtilise2 = false;    // joueur 2 : idem
+        Personnage abandonneur = null;     // null tant que personne n'abandonne
+
+
+        // Qui joue ce tour-ci ?
+        boolean tourDuJoueur1 = (tour % 2 == 0);
+        Personnage attaquant;
+        Personnage defenseur;
+        if (tourDuJoueur1) {
+            attaquant = p1;
+            defenseur = p2;
+        } else {
+            attaquant = p2;
+            defenseur = p1;
+        }
+
+        // Menu
+        System.out.println();
+        System.out.println("=== Tour de " + attaquant.nom + " ===");
+        System.out.println("1. Attaquer");
+        System.out.println("2. Monter de niveau");
+        System.out.println("3. Afficher l'état des combattants");
+        System.out.println("4. Abandonner");
+        System.out.print("Votre choix : ");
+        int choix = sc.nextInt();
+        sc.nextLine();
+
+        boolean tourJoue = false; // true si l'action consomme le tour
+
+        switch (choix) {
+            case 1:
+                attaquant.attaquer(defenseur);
+                tourJoue = true;
+                break;
+            case 2:
+                boolean dejaUtilise;
+                if (tourDuJoueur1) {
+                    dejaUtilise = niveauUtilise1;
+                } else {
+                    dejaUtilise = niveauUtilise2;
+                }
+
+                if (dejaUtilise) {
+                    System.out.println("Vous avez déjà monté de niveau, action refusée.");
+                } else {
+                    attaquant.monterDeNiveau();
+                    if (tourDuJoueur1) {
+                        niveauUtilise1 = true;
+                    } else {
+                        niveauUtilise2 = true;
+                    }
+                    tourJoue = true;
+                }
+                break;
+            case 3:
+                p1.afficherEtat();
+                p2.afficherEtat();
+                break;
+            case 4:
+                abandonneur = attaquant;
+                break;
+            default:
+                System.out.println("Choix invalide, rejouez.");
+        }
+
+        if (tourJoue) {
+            tour++;
+        }
+
+        // Annonce du résultat
+        System.out.println();
+        System.out.println("=== FIN DU COMBAT ===");
+        Personnage vainqueur;
+        if (abandonneur != null) {
+            System.out.println(abandonneur.nom + " abandonne.");
+            if (abandonneur == p1) {
+                vainqueur = p2;
+            } else {
+                vainqueur = p1;
+            }
+        } else if (p1.estVivant()) {
+            vainqueur = p1;
+        } else {
+            vainqueur = p2;
+        }
+
+        System.out.println("Vainqueur : " + vainqueur.nom);
+        System.out.println(p1.nom + " : niveau " + p1.niveau);
+        System.out.println(p2.nom + " : niveau " + p2.niveau);
+        System.out.println("Nombre de tours joués : " + tour);
+
         sc.close();
+    }
+}
+
+
+
+
+
+
+
 
 
 
@@ -107,9 +214,6 @@ public class Main {
         goku.attaquer(lufy); // Naruto est KO, on attaque donc Vegeta
         lufy.afficherEtat();
         */
-    }
 
-
-}
 
 
